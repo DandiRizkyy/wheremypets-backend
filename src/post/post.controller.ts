@@ -19,8 +19,6 @@ export class PostController {
   constructor(private postService: PostService) {}
 
   // get all post
-  @ApiBearerAuth()
-  // @ApiOkResponse({ type: UserEntity, isArray: true })
   @Get()
   async getAllPost() {
     return await this.postService.getAllPosts();
@@ -29,7 +27,7 @@ export class PostController {
   // get post by id
   @UseGuards(AuthGuard)
   @ApiBearerAuth()
-  @Get()
+  @Get(':id')
   async getPostById(id: number) {
     return await this.postService.getPostById(id);
   }
@@ -43,7 +41,8 @@ export class PostController {
   }
 
   // update post
-  @Patch()
+  @ApiBearerAuth()
+  @Patch(':id')
   async updatePost(@Body() id: number, data: UpdatePost) {
     return await this.postService.updatePost(id, data);
   }
