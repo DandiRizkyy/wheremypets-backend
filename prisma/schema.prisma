@@ -15,15 +15,17 @@ model User {
   id        Int      @id @default(autoincrement())
   email     String   @unique
   password  String
-  notes     Note[]
+  notes     Post[]
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
 }
 
-model Note {
+model Post {
   id          Int      @id @default(autoincrement())
   title       String
+  name        String?
   description String
+  image       String
   userId      Int
   user        User?    @relation(fields: [userId], references: [id])
   createdAt   DateTime @default(now())
