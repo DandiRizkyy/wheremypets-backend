@@ -26,7 +26,7 @@ model Post {
   name        String?
   description String
   image       String
-  userId      Int
+  userId      Int?
   user        User?    @relation(fields: [userId], references: [id])
   createdAt   DateTime @default(now())
   updatedAt   DateTime @default(now()) @updatedAt
