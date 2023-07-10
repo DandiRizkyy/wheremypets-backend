@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  Param,
   Patch,
   Post,
   UseGuards,
@@ -28,7 +29,7 @@ export class PostController {
   @UseGuards(AuthGuard)
   @ApiBearerAuth()
   @Get(':id')
-  async getPostById(id: number) {
+  async getPostById(@Param('id') id: number) {
     return await this.postService.getPostById(id);
   }
 
@@ -43,7 +44,7 @@ export class PostController {
   // update post
   @ApiBearerAuth()
   @Patch(':id')
-  async updatePost(@Body() id: number, data: UpdatePost) {
+  async updatePost(@Param('id') id: number, @Body() data: UpdatePost) {
     return await this.postService.updatePost(id, data);
   }
 
@@ -51,7 +52,7 @@ export class PostController {
   @UseGuards(AuthGuard)
   @ApiBearerAuth()
   @Delete(':id')
-  async deletePost(id: number) {
+  async deletePost(@Param('id') id: number) {
     return await this.postService.deletePost(id);
   }
 }
