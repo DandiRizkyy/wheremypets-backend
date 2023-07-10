@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreatePost } from './dto/create-post.dto';
 import { UpdatePost } from './dto/update-post.dto';
+import { instanceToPlain } from 'class-transformer';
 
 @Injectable()
 export class PostService {
@@ -15,11 +16,15 @@ export class PostService {
 
   // get post by id
   async getPostById(id: number) {
-    return await this.prismaService.post.findUnique({
+    const user = await this.prismaService.post.findFirst({
       where: {
         id: id,
       },
+      include: {
+        user: true,
+      },
     });
+    return instanceToPlain(user, { excludePrefixes: ['password'] });
   }
 
   // create post

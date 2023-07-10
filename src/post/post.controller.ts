@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  ParseIntPipe,
   Patch,
   Post,
   UseGuards,
@@ -29,7 +30,7 @@ export class PostController {
   @UseGuards(AuthGuard)
   @ApiBearerAuth()
   @Get(':id')
-  async getPostById(@Param('id') id: number) {
+  async getPostById(@Param('id', ParseIntPipe) id: number) {
     return await this.postService.getPostById(id);
   }
 
@@ -44,7 +45,10 @@ export class PostController {
   // update post
   @ApiBearerAuth()
   @Patch(':id')
-  async updatePost(@Param('id') id: number, @Body() data: UpdatePost) {
+  async updatePost(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() data: UpdatePost,
+  ) {
     return await this.postService.updatePost(id, data);
   }
 
@@ -52,7 +56,7 @@ export class PostController {
   @UseGuards(AuthGuard)
   @ApiBearerAuth()
   @Delete(':id')
-  async deletePost(@Param('id') id: number) {
+  async deletePost(@Param('id', ParseIntPipe) id: number) {
     return await this.postService.deletePost(id);
   }
 }
