@@ -15,7 +15,7 @@ model User {
   id        Int      @id @default(autoincrement())
   email     String   @unique
   password  String
-  notes     Post[]
+  posts     Post[]
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
 }
