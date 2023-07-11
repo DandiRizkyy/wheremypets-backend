@@ -15,7 +15,7 @@ export class PostService {
   }
 
   // get post by id
-  async getPostById(id: number) {
+  async getPostById(id: string) {
     const user = await this.prismaService.post.findFirst({
       where: {
         id: id,
@@ -35,7 +35,7 @@ export class PostService {
   }
 
   // update post
-  async updatePost(id: number, data: UpdatePost) {
+  async updatePost(id: string, data: UpdatePost) {
     return await this.prismaService.post.update({
       where: {
         id: id,
@@ -45,7 +45,7 @@ export class PostService {
   }
 
   // delete post
-  async deletePost(id: number) {
+  async deletePost(id: string) {
     return await this.prismaService.post.delete({
       where: {
         id: id,

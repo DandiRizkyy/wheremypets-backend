@@ -32,7 +32,7 @@ export class UserController {
   @ApiBearerAuth()
   @ApiOkResponse({ type: UserRelationEntity })
   @Get(':id')
-  async getUserById(@Param('id', ParseIntPipe) id: number) {
+  async getUserById(@Param('id') id: string) {
     return await this.userService.getUserById(id);
   }
 
@@ -44,7 +44,7 @@ export class UserController {
     description: 'Data with id: {id} successfully deleted.',
   })
   @Delete(':id')
-  async deleteUser(@Param('id', ParseIntPipe) id: number) {
+  async deleteUser(@Param('id') id: string) {
     return await this.userService.deleteUser(id);
   }
 }

@@ -3,8 +3,8 @@ import { ApiProperty } from '@nestjs/swagger';
 import { User } from '@prisma/client';
 
 export class UserEntity implements User {
-  @ApiProperty({ default: 1 })
-  id: number;
+  @ApiProperty()
+  id: string;
 
   @ApiProperty({ default: 'Example Email' })
   email: string;

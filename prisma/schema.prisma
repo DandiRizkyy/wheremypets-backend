@@ -12,7 +12,7 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
+  id        String   @id @default(uuid())
   email     String   @unique
   password  String
   posts     Post[]
@@ -21,12 +21,12 @@ model User {
 }
 
 model Post {
-  id          Int      @id @default(autoincrement())
+  id          String   @id @default(uuid())
   title       String
   name        String?
   description String
   image       String
-  userId      Int?
+  userId      String?
   user        User?    @relation(fields: [userId], references: [id])
   createdAt   DateTime @default(now())
   updatedAt   DateTime @default(now()) @updatedAt

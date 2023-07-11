@@ -13,7 +13,7 @@ export class CreatePost {
   @IsString()
   @IsNotEmpty()
   image: string;
-  @IsNumber()
+  @IsString()
   @IsOptional()
-  userId: number;
+  userId: string;
 }

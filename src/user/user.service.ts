@@ -20,7 +20,7 @@ export class UserService {
   }
 
   // business logic get user by id
-  async getUserById(id: number) {
+  async getUserById(id: string) {
     const user = await this.prismaService.user.findFirst({
       where: {
         id: id,
@@ -33,7 +33,7 @@ export class UserService {
   }
 
   // business logic delete user
-  async deleteUser(id: number) {
+  async deleteUser(id: string) {
     try {
       await this.prismaService.user.delete({
         where: {
