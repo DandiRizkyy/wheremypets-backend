@@ -5,9 +5,10 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { FoundModule } from './found/found.module';
+import { FindModule } from './find/find.module';
 
 @Module({
-  imports: [AuthModule, UserModule, FoundModule],
+  imports: [AuthModule, UserModule, FoundModule, FindModule],
   controllers: [AppController],
   providers: [AppService],
 })
