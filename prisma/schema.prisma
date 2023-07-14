@@ -31,6 +31,7 @@ model Found {
   location       String
   locationDetail String
   species        String
+  isFound        Boolean  @default(false)
   userId         String?
   user           User?    @relation(fields: [userId], references: [id])
   createdAt      DateTime @default(now())
@@ -46,6 +47,7 @@ model Find {
   location       String
   locationDetail String
   species        String
+  isFound        Boolean  @default(false)
   userId         String?
   user           User?    @relation(fields: [userId], references: [id])
   createdAt      DateTime @default(now())

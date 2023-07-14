@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsOptional, IsString } from 'class-validator';
+import { IsBoolean, IsOptional, IsString } from 'class-validator';
 
 export class UpdatePost {
   @ApiProperty()
@@ -31,6 +31,11 @@ export class UpdatePost {
   @IsString()
   @IsOptional()
   species?: string;
+
+  @ApiProperty()
+  @IsBoolean()
+  @IsOptional()
+  isFound: boolean;
 
   @ApiProperty()
   @IsString()
