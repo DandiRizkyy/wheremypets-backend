@@ -39,6 +39,11 @@ export class CreatePost {
 
   @ApiProperty()
   @IsString()
+  @IsNotEmpty()
+  contact: string;
+
+  @ApiProperty()
+  @IsString()
   @IsOptional()
   userId: string;
 }

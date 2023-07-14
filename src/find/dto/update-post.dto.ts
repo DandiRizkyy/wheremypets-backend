@@ -33,9 +33,14 @@ export class UpdatePost {
   species?: string;
 
   @ApiProperty()
+  @IsString()
+  @IsOptional()
+  contact?: string;
+
+  @ApiProperty()
   @IsBoolean()
   @IsOptional()
-  isFound: boolean;
+  isFound?: boolean;
 
   @ApiProperty()
   @IsString()
