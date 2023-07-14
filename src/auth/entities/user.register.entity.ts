@@ -6,6 +6,9 @@ export class UserRegisterEntity implements User {
   @ApiProperty()
   id: string;
 
+  @ApiProperty()
+  name: string;
+
   @ApiProperty({ default: 'user@gmail.com' })
   email: string;
 

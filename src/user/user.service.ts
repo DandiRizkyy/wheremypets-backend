@@ -12,6 +12,7 @@ export class UserService {
     return await this.prismaService.user.findMany({
       select: {
         id: true,
+        name: true,
         email: true,
         createdAt: true,
         updatedAt: true,
@@ -26,7 +27,7 @@ export class UserService {
         id: id,
       },
       include: {
-        posts: true,
+        foundPosts: true,
       },
     });
     return instanceToPlain(user, { excludePrefixes: ['quantity', 'password'] });

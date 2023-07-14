@@ -5,18 +5,18 @@ import { UpdatePost } from './dto/update-post.dto';
 import { instanceToPlain } from 'class-transformer';
 
 @Injectable()
-export class PostService {
+export class FoundService {
   constructor(private prismaService: PrismaService) {}
 
   // get all posts
 
   async getAllPosts() {
-    return await this.prismaService.post.findMany();
+    return await this.prismaService.found.findMany();
   }
 
   // get post by id
   async getPostById(id: string) {
-    const user = await this.prismaService.post.findFirst({
+    const user = await this.prismaService.found.findFirst({
       where: {
         id: id,
       },
@@ -29,14 +29,14 @@ export class PostService {
 
   // create post
   async createPost(data: CreatePost) {
-    return await this.prismaService.post.create({
+    return await this.prismaService.found.create({
       data: data,
     });
   }
 
   // update post
   async updatePost(id: string, data: UpdatePost) {
-    return await this.prismaService.post.update({
+    return await this.prismaService.found.update({
       where: {
         id: id,
       },
@@ -46,7 +46,7 @@ export class PostService {
 
   // delete post
   async deletePost(id: string) {
-    return await this.prismaService.post.delete({
+    return await this.prismaService.found.delete({
       where: {
         id: id,
       },

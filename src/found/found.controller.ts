@@ -9,21 +9,21 @@ import {
   Post,
   UseGuards,
 } from '@nestjs/common';
-import { PostService } from './post.service';
+import { FoundService } from './found.service';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from 'src/auth/guard/auth.guard';
 import { CreatePost } from './dto/create-post.dto';
 import { UpdatePost } from './dto/update-post.dto';
 
-@Controller('post')
-@ApiTags('post')
-export class PostController {
-  constructor(private postService: PostService) {}
+@Controller('found')
+@ApiTags('found')
+export class FoundController {
+  constructor(private foundService: FoundService) {}
 
   // get all post
   @Get()
   async getAllPost() {
-    return await this.postService.getAllPosts();
+    return await this.foundService.getAllPosts();
   }
 
   // get post by id
@@ -31,7 +31,7 @@ export class PostController {
   @ApiBearerAuth()
   @Get(':id')
   async getPostById(@Param('id') id: string) {
-    return await this.postService.getPostById(id);
+    return await this.foundService.getPostById(id);
   }
 
   // create post
@@ -39,14 +39,14 @@ export class PostController {
   @ApiBearerAuth()
   @Post()
   async createPost(@Body() data: CreatePost) {
-    return await this.postService.createPost(data);
+    return await this.foundService.createPost(data);
   }
 
   // update post
   @ApiBearerAuth()
   @Patch(':id')
   async updatePost(@Param('id') id: string, @Body() data: UpdatePost) {
-    return await this.postService.updatePost(id, data);
+    return await this.foundService.updatePost(id, data);
   }
 
   // delete post
@@ -54,6 +54,6 @@ export class PostController {
   @ApiBearerAuth()
   @Delete(':id')
   async deletePost(@Param('id') id: string) {
-    return await this.postService.deletePost(id);
+    return await this.foundService.deletePost(id);
   }
 }
