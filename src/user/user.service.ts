@@ -28,6 +28,7 @@ export class UserService {
       },
       include: {
         foundPosts: true,
+        findPosts: true,
       },
     });
     return instanceToPlain(user, { excludePrefixes: ['quantity', 'password'] });
