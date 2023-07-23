@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Post,
+  Request,
   UseGuards,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
@@ -42,17 +43,24 @@ export class FindController {
   }
 
   // update post
+  @UseGuards(AuthGuard)
   @ApiBearerAuth()
   @Patch(':id')
-  async updatePost(@Param('id') id: string, @Body() data: UpdatePost) {
-    return await this.findService.updatePost(id, data);
+  async updatePost(
+    @Param('id') id: string,
+    @Request() req,
+    @Body() data: UpdatePost,
+  ) {
+    const userId = req.user.userId;
+    return await this.findService.updatePost(id, userId, data);
   }
 
   // delete post
   @UseGuards(AuthGuard)
   @ApiBearerAuth()
   @Delete(':id')
-  async deletePost(@Param('id') id: string) {
-    return await this.findService.deletePost(id);
+  async deletePost(@Param('id') id: string, @Request() req) {
+    const userId = req.user.userId;
+    return await this.findService.deletePost(id, userId);
   }
 }

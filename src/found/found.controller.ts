@@ -4,8 +4,8 @@ import {
   Delete,
   Get,
   Param,
-  ParseIntPipe,
   Patch,
+  Request,
   Post,
   UseGuards,
 } from '@nestjs/common';
@@ -43,17 +43,24 @@ export class FoundController {
   }
 
   // update post
+  @UseGuards(AuthGuard)
   @ApiBearerAuth()
   @Patch(':id')
-  async updatePost(@Param('id') id: string, @Body() data: UpdatePost) {
-    return await this.foundService.updatePost(id, data);
+  async updatePost(
+    @Param('id') id: string,
+    @Request() req,
+    @Body() data: UpdatePost,
+  ) {
+    const userId = req.user.userId;
+    return await this.foundService.updatePost(id, userId, data);
   }
 
   // delete post
   @UseGuards(AuthGuard)
   @ApiBearerAuth()
   @Delete(':id')
-  async deletePost(@Param('id') id: string) {
-    return await this.foundService.deletePost(id);
+  async deletePost(@Param('id') id: string, @Request() req) {
+    const userId = req.user.userId;
+    return await this.foundService.deletePost(id, userId);
   }
 }

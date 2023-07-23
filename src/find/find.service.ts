@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreatePost } from './dto/create-post.dto';
 import { UpdatePost } from './dto/update-post.dto';
@@ -35,7 +35,21 @@ export class FindService {
   }
 
   // update post
-  async updatePost(id: string, data: UpdatePost) {
+  async updatePost(id: string, userId: string, data: UpdatePost) {
+    // check if the post exists and belongs to the current user
+    const post = await this.prismaService.find.findFirst({
+      where: {
+        id,
+        userId,
+      },
+    });
+
+    if (!post) {
+      throw new NotFoundException(
+        'Post not found or you are not the owner of the post',
+      );
+    }
+
     return await this.prismaService.find.update({
       where: {
         id: id,
@@ -45,7 +59,22 @@ export class FindService {
   }
 
   // delete post
-  async deletePost(id: string) {
+  async deletePost(id: string, userId: string) {
+    // check if the post exists and belongs to the current user
+
+    const post = await this.prismaService.find.findFirst({
+      where: {
+        id,
+        userId, // current userId
+      },
+    });
+
+    if (!post) {
+      throw new NotFoundException(
+        'Post not found or you are not the owner of the post',
+      );
+    }
+
     return await this.prismaService.find.delete({
       where: {
         id: id,
